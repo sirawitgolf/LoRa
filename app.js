@@ -80,8 +80,18 @@ app.post('/adddeveui', function (req, res) {
 //dropdatabase
 app.get('/dropdata',(req,res)=>{
   db.data.remove((err,docs)=>{
-   if(res.statusCode==200)res.send('drop ok')
+   if(res.statusCode==200)res.send('Deleted all at '+docs.deletedCount+' Object')
    else res.send("can't drop")
+  })
+})
+
+//delete deveui
+app.get('/deletedeveui/:id',(req,res)=>{
+  db.data.remove({
+    DevEUI:req.params.id
+  },function (err, docs) {
+    console.log('delete',docs);
+    res.send('Deleted '+docs.deletedCount+' Object');
   })
 })
 
