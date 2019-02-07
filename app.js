@@ -27,7 +27,7 @@ app.get('/getdeveui/:id', function (req, res) {
       console.log('found', JSON.stringify(docs));
       res.json(docs);
     } else {
-      res.send('sensor not found');
+      res.send('-1');
       console.log(docs)
     }
   });
@@ -75,6 +75,14 @@ app.post('/adddeveui', function (req, res) {
     console.log(docs);
     res.send(docs);
   });
+})
+
+//dropdatabase
+app.get('/dropdata',(req,res)=>{
+  db.data.remove((err,docs)=>{
+   if(res.statusCode==200)res.send('drop ok')
+   else res.send("can't drop")
+  })
 })
 
 var server = app.listen(8100, function () {
